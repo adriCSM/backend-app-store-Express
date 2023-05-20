@@ -5,6 +5,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
+app.use(
+    cors({
+        origin: ['http://localhost:8080'],
+    }),
+);
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 mongoose
     .connect(process.env.URI)
     .then(() => {
@@ -13,15 +20,6 @@ mongoose
     .catch((err) => {
         console.info(err.message);
     });
-
-app.use(
-    cors({
-        origin: ['http://localhost:8080'],
-    }),
-);
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use('/', require('./router/router'));
 
 app.listen(process.env.PORT, () => {
