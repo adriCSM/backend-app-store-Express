@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: ['http://localhost:8080', 'https://adricsm.github.io/', 'https://adricsm.github.io/*'],
+        origin: ['http://localhost:8080', 'https://adricsm.github.io', 'https://adricsm.github.io/*'],
     }),
 );
 app.use(express.json());
