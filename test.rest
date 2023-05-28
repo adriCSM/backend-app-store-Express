@@ -1,0 +1,17 @@
+GET  http://localhost:3123/auth/registrasi
+###
+POST http://localhost:3123/auth/registrasi
+Content-Type: application/json
+
+{
+   "firstName": "adri candra",
+    "lastName": "saputra mangidi",  
+    "phoneNumber": "082259042427",  
+    "email": "adricandra@gmail.com",
+    "password": "mangidi7",
+    "confirmPassword": "mangidri7",
+}
+
+
+### login
+POST http://localhost:3123/auth/login
