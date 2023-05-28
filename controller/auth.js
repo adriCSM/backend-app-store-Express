@@ -41,7 +41,8 @@ module.exports = class {
     static async login(req, res) {
         const { email, password } = req.body;
         const cekAkun = await user.findOne({ email });
-        if (cekAkun) {
+        if (!email || !password) res.status(400).json({ message: 'Field kosong' });
+        else if (cekAkun) {
             const cekPassword = await bcrypt.compare(password, cekAkun.password);
             if (cekPassword) {
                 const { fullName, phoneNumber, email } = cekAkun;
