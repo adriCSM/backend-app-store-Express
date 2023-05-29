@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const user = require('../model/user.js');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 module.exports = class {
     // REGISTER
@@ -125,6 +126,47 @@ module.exports = class {
             }
         } else {
             res.sendStatus(204);
+        }
+    }
+    // SEND MESSAGE ON EMAIL
+    static async sendEmail(req, res) {
+        const { email } = req.body;
+        const cek = await user.findOne({ email });
+        if (cek) {
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                requireTLS: true,
+                Port: 465,
+                secureConnection: false,
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
+                },
+                tls: {
+                    rejectUnauthorized: true,
+                },
+            });
+
+            try {
+                const a = await transporter.sendMail({
+                    from: 'AM Store <acsm.web291201@gmail.com>',
+                    to: email,
+                    subject: 'Change Password🔑',
+                    attachments: [
+                        {
+                            filename: 'index.html',
+                            content: '<h1>Click this link to change your password:</h1 ><a style="text-decoration:none;"  href="https://adricsm.github.io/store/">Change password</a>',
+                            contentType: 'text/html',
+                            contentDisposition: 'inline',
+                        },
+                    ],
+                });
+                res.status(200).json({ message: 'Periksa email anda untuk memperbarui sandi' });
+            } catch (err) {
+                res.status(500).json({ message: err.message });
+            }
+        } else {
+            res.status(404).json({ message: 'Email belum terdaftar' });
         }
     }
 };
