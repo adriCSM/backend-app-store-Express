@@ -85,6 +85,7 @@ module.exports = class {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
                         secure: true,
+                        domain: 'https://adricsm.github.io/store/',
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
