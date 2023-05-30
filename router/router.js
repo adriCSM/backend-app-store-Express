@@ -9,6 +9,8 @@ router.post('/auth/login', auth.login);
 router.get('/token', auth.refreshAccessToken);
 router.delete('/logout', auth.logOut);
 router.post('/email', auth.sendEmail);
+router.post('/wa/costumer', auth.sendWaCostumer);
+router.post('/wa/admin', auth.sendWaAdmin);
 
 /**GET DATA */
 router.get('/data', verifyAccessToken, handler.getProduct);
