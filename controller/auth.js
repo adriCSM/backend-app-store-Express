@@ -99,6 +99,7 @@ module.exports = class {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
                         secure: true,
+                        sameSite: 'none',
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
