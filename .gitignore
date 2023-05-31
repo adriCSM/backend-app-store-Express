@@ -2,6 +2,6 @@
 .env
 .wwebjs_cache
 /.wwebjs_cache
-.wwebjs_auth\session
-.wwebjs_auth
-/.wwebjs_auth
+# .wwebjs_auth\session
+# .wwebjs_auth
+# /.wwebjs_auth
