@@ -26,17 +26,18 @@ module.exports = class {
     // REGISTER
     static async register(req, res) {
         const { firstName, lastName, phoneNumber, email, password, confirmPassword, gender } = req.body;
-        const number = '62' + phoneNumber.slice(1) + '@c.us';
-        const cekNumber = await client.isRegisteredUser(number);
+
         if (!firstName || !lastName || !phoneNumber || !email || !password || !confirmPassword || !gender) {
             res.status(400).json({ message: 'Terdapat kolom kosong' });
-        } else if (!cekNumber) {
-            res.status(400).json({ message: 'Nomor tidak terdaftar pada WhatsApp. Gunakan nomor lain' });
         } else if (password !== confirmPassword) {
             res.status(400).json({ message: 'Password dan confirm password tidak sesuai' });
         } else {
+            const number = '62' + phoneNumber.slice(1) + '@c.us';
+            const cekNumber = await client.isRegisteredUser(number);
             const cekAkun = await user.findOne({ email });
-            if (!cekAkun) {
+            if (!cekNumber) {
+                res.status(400).json({ message: 'Nomor tidak terdaftar pada WhatsApp. Gunakan nomor lain' });
+            } else if (!cekAkun) {
                 const fullName = firstName + ' ' + lastName;
                 const salt = await bcrypt.genSalt(10);
                 const hashPassword = await bcrypt.hash(password, salt);

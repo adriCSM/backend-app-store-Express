@@ -1,2 +1,3 @@
-2023/05/31-15:24:11.042 490 Creating DB C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Session Storage since it was missing.
-2023/05/31-15:24:11.055 490 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Session Storage/MANIFEST-000001
+2023/05/31-15:55:01.908 2910 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Session Storage/MANIFEST-000001
+2023/05/31-15:55:01.909 2910 Recovering log #3
+2023/05/31-15:55:01.909 2910 Reusing old log C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Session Storage/000003.log 

@@ -1,10 +1,9 @@
-2023/05/31-15:24:14.481 ea0 Creating DB C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
-2023/05/31-15:24:14.519 ea0 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2023/05/31-15:24:14.695 3cfc Level-0 table #5: started
-2023/05/31-15:24:14.707 3cfc Level-0 table #5: 7441 bytes OK
-2023/05/31-15:24:14.712 3cfc Delete type=0 #3
-2023/05/31-15:24:14.713 3cfc Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)
-2023/05/31-15:24:16.377 ea0 Level-0 table #7: started
-2023/05/31-15:24:16.389 ea0 Level-0 table #7: 17745 bytes OK
-2023/05/31-15:24:16.393 ea0 Delete type=0 #4
-2023/05/31-15:24:16.394 ea0 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/05/31-15:55:02.354 43f0 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/05/31-15:55:02.355 43f0 Recovering log #9
+2023/05/31-15:55:02.401 43f0 Reusing old log C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000009.log 
+2023/05/31-16:36:07.515 2910 Compacting 1@1 + 1@2 files
+2023/05/31-16:36:07.543 2910 Generated table #13@1: 13042 keys, 465621 bytes
+2023/05/31-16:36:07.543 2910 Compacted 1@1 + 1@2 files => 465621 bytes
+2023/05/31-16:36:07.547 2910 compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/05/31-16:36:07.547 2910 Delete type=2 #5
+2023/05/31-16:36:07.547 2910 Delete type=2 #11
