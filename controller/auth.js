@@ -12,6 +12,7 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         executablePath: puppeteer.executablePath(),
+        args: ['--no-sandbox'],
     },
 });
 client.on('qr', (qr) => {
