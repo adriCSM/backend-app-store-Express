@@ -2,11 +2,17 @@ const bcrypt = require('bcrypt');
 const user = require('../model/user.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+
+const puppeteer = require('puppeteer');
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+
 const client = new Client({
     authStrategy: new LocalAuth(),
-    executablePath: '/path/to/chromium-binary',
+    puppeteer: {
+        executablePath: puppeteer.executablePath(),
+    },
 });
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
@@ -217,9 +223,9 @@ module.exports = class {
             let waktu;
 
             if (jam >= 6 && jam <= 10) waktu = 'pagi';
-            if (jam <= 14) waktu = 'siang';
-            if (jam <= 18) waktu = 'sore';
-            if (jam <= 24 || jam <= 3) waktu = 'malam';
+            else if (jam <= 14) waktu = 'siang';
+            else if (jam <= 18) waktu = 'sore';
+            else if (jam <= 24 || jam <= 3) waktu = 'malam';
             else {
                 waktu = 'subuh';
             }
