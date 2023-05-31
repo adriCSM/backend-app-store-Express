@@ -1,3 +1,2 @@
-2023/05/31-13:38:41.881 15cc Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Platform Notifications/MANIFEST-000001
-2023/05/31-13:38:41.882 15cc Recovering log #3
-2023/05/31-13:38:41.882 15cc Reusing old log C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Platform Notifications/000003.log 
+2023/05/31-15:24:50.874 ea0 Creating DB C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Platform Notifications since it was missing.
+2023/05/31-15:24:50.890 ea0 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Platform Notifications/MANIFEST-000001

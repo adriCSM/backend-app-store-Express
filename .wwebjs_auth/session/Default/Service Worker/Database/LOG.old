@@ -1,3 +1,2 @@
-2023/05/31-13:38:41.888 3a5c Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001
-2023/05/31-13:38:41.889 3a5c Recovering log #3
-2023/05/31-13:38:41.889 3a5c Reusing old log C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Service Worker\Database/000003.log 
+2023/05/31-15:24:15.785 ea0 Creating DB C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Service Worker\Database since it was missing.
+2023/05/31-15:24:15.820 ea0 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001

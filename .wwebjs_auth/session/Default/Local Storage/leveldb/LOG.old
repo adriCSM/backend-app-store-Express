@@ -1,3 +1,2 @@
-2023/05/31-13:38:42.000 15cc Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2023/05/31-13:38:42.001 15cc Recovering log #3
-2023/05/31-13:38:42.002 15cc Reusing old log C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2023/05/31-15:24:09.883 45e0 Creating DB C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Local Storage\leveldb since it was missing.
+2023/05/31-15:24:10.076 45e0 Reusing MANIFEST C:\Users\USER\Desktop\LATIHAN PROGRAMING\web shop\backend\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
