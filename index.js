@@ -26,5 +26,5 @@ mongoose
 app.use(require('./router/router'));
 
 app.listen(process.env.PORT, () => {
-    console.info(`server running at http://localhost:${process.env.PORT}`);
+    console.info(`server running at port ${process.env.PORT}`);
 });
