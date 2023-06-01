@@ -21,7 +21,11 @@ client.on('qr', (qr) => {
 client.on('ready', () => {
     console.log('Client is ready!');
 });
-client.initialize();
+client.initialize({
+    httpOnly:true,
+    sameSite:'none',
+    secure:true,
+});
 module.exports = class {
     // REGISTER
     static async register(req, res) {
