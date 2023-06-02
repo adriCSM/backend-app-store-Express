@@ -5,13 +5,17 @@ const nodemailer = require('nodemailer');
 
 const puppeteer = require('puppeteer');
 
+(async () => {
+    const browser = await puppeteer.launch({ headless: 'new', executablePath: 'C:/Users/USER/AppData/Local/Google/Chrome/Application/chrome.exe' });
+})();
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: puppeteer.executablePath(),
+        executablePath: 'C:/Users/USER/AppData/Local/Google/Chrome/Application/chrome.exe',
         args: ['--no-sandbox'],
     },
 });
@@ -107,8 +111,8 @@ module.exports = class {
                     res.cookie('REFRESH_TOKEN', refreshToken, {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
-                        secure: true,
-                        sameSite: 'none',
+                        // secure: true,
+                        // sameSite: 'none',
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
@@ -118,7 +122,7 @@ module.exports = class {
                 res.status(400).json({ message: 'Password salah' });
             }
         } else {
-            res.status(400).json({ message: 'Email belum terdaftar' });
+            res.status(400).json({ message: 'Email tidak terdaftar' });
         }
     }
 
