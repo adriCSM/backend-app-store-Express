@@ -6,7 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
 
-app.use(cors({ credentials: true, origin: ['http://localhost:8080', 'https://adricsm.github.io'] }));
+app.use(cors({ origin: ['http://localhost:8080', 'https://adricsm.github.io'] }));
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
