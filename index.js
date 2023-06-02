@@ -20,11 +20,6 @@ mongoose
         console.info(err.message);
     });
 
-if ((process.env.NODE_ENV = 'production')) {
-    cookieOptions.secure = true;
-    cookieOptions.samwSite = 'none';
-}
-
 app.use(require('./router/router'));
 
 app.listen(process.env.PORT, () => {
