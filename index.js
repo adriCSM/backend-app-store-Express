@@ -21,8 +21,8 @@ mongoose
     });
 
 if ((process.env.NODE_ENV = 'production')) {
-    cookeeOptions.secure = true;
-    cookeeOptions.samwSite = 'none';
+    cookieOptions.secure = true;
+    cookieOptions.samwSite = 'none';
 }
 
 app.use(require('./router/router'));
