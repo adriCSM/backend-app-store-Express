@@ -86,7 +86,7 @@ module.exports = class {
                         },
                     );
 
-                    req.session = refreshToken;
+                    req.session.token = refreshToken;
 
                     res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
