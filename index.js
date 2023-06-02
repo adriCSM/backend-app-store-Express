@@ -19,6 +19,12 @@ mongoose
     .catch((err) => {
         console.info(err.message);
     });
+
+if ((proccess.env.NODE_ENV = 'production')) {
+    cookeeOptions.secure = true;
+    cookeeOptions.samwSite = 'none';
+}
+
 app.use(require('./router/router'));
 
 app.listen(process.env.PORT, () => {
