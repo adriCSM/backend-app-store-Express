@@ -89,7 +89,8 @@ module.exports = class {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
                         sameSite: 'None',
-                        // secure: true,
+                        domain: 'https://adricsm.github.io',
+                        secure: true,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
