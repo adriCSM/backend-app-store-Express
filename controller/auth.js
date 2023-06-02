@@ -85,12 +85,12 @@ module.exports = class {
                             refreshToken,
                         },
                     );
-                    res.json(refreshToken);
+
                     res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
-                        maxAge: 24 * 60 * 60 * 1000,
+                        expires: new Date(Date.now() + 8 * 3600000),
                         secure: true,
-                        sameSite: 'none',
+                        sameSite: None,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
