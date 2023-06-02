@@ -11,7 +11,7 @@ app.use(cors({ credentials: true, origin: ['http://localhost:8080', 'https://adr
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser({}));
+app.use(cookieParser());
 app.use(
     session({
         secret: process.env.SECRET,
