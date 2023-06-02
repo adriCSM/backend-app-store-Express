@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const user = require('../model/user.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const { createHmac } = require('node:crypto');
 
 module.exports = class {
     // REGISTER
@@ -86,13 +87,16 @@ module.exports = class {
                         },
                     );
 
-                    req.session.token = refreshToken;
+                    // req.session.token = refreshToken;
 
-                    res.cookie('refreshToken', refreshToken, {
+                    const tandaTangan = createHmac('sha256', process.env.SECRET).update(refreshToken).digest('hex');
+
+                    res.cookie('refreshToken', `${refreshToken}|${tandaTangan}`, {
                         httpOnly: true,
                         expires: new Date(Date.now() + 8 * 3600000),
                         secure: true,
                         sameSite: 'None',
+                        signed: true,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
@@ -108,21 +112,28 @@ module.exports = class {
 
     // REFRESH ACCESS TOKEN
     static async refreshAccessToken(req, res) {
-        const refreshToken = req.cookies.refreshToken;
+        const refreshToken = req.signedCookies.refreshToken;
+
         if (refreshToken) {
-            const cekUser = await user.findOne({ refreshToken });
-            if (cekUser) {
-                jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-                    if (err) res.sendStatus(403);
-                    else {
-                        const newAccessToken = jwt.sign({ decoded }, process.env.ACCESS_TOKEN_SECRET, {
-                            expiresIn: '30s',
-                        });
-                        res.status(200).json({ accessToken: newAccessToken });
-                    }
-                });
+            const [token, tandaTangan] = req.signedCookies.refreshToken.split('|');
+            const cekTandaTangan = createHmac('sha256', process.env.SECRET).update(token).digest('hex');
+            if (cekTandaTangan == tandaTangan) {
+                const cekUser = await user.findOne({ refreshToken: token });
+                if (cekUser) {
+                    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+                        if (err) res.sendStatus(403);
+                        else {
+                            const newAccessToken = jwt.sign({ decoded }, process.env.ACCESS_TOKEN_SECRET, {
+                                expiresIn: '30s',
+                            });
+                            res.status(200).json({ accessToken: newAccessToken });
+                        }
+                    });
+                } else {
+                    res.sendStatus(403);
+                }
             } else {
-                res.sendStatus(403);
+                res.status(401).json({ message: 'Signed key tidak valid' });
             }
         } else {
             res.sendStatus(401);

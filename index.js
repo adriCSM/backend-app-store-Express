@@ -5,20 +5,20 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
-const session = require('express-session');
+// const session = require('express-session');
 
 app.use(cors({ credentials: true, origin: ['http://localhost:8080', 'https://adricsm.github.io'] }));
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(
-    session({
-        secret: process.env.SECRET,
-        saveUninitialized: true,
-        resave: false,
-    }),
-);
+app.use(cookieParser(process.env.SECRET));
+// app.use(
+//     session({
+//         secret: process.env.SECRET,
+//         saveUninitialized: true,
+//         resave: false,
+//     }),
+// );
 mongoose
     .connect(process.env.URI)
     .then(() => {
