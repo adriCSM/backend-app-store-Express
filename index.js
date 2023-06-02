@@ -6,7 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
 
-app.use(cors({ origin: 'https://adricsm.github.io', credentials: true }));
+app.use(cors({ credentials: true, origin: 'https://adricsm.github.io'  }));
 
 app.use(cookieParser());
 
