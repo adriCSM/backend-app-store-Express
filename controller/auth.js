@@ -86,12 +86,13 @@ module.exports = class {
                         },
                     );
 
+                    req.session = refreshToken;
+
                     res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
                         expires: new Date(Date.now() + 8 * 3600000),
                         secure: true,
                         sameSite: 'None',
-                        signed: true,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
@@ -130,7 +131,6 @@ module.exports = class {
     // LOG OUT
     static async logOut(req, res) {
         const cookie = req.cookies.refreshToken;
-
         if (cookie) {
             const cekAkun = await user.findOne({ refreshToken: cookie });
             if (cekAkun) {
