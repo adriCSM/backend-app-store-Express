@@ -85,11 +85,11 @@ module.exports = class {
                             refreshToken,
                         },
                     );
-                    res.cookie('REFRESH_TOKEN', refreshToken, {
+                    res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
+                        sameSite: false,
                         secure: true,
-                        sameSite: 'none',
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
@@ -105,7 +105,8 @@ module.exports = class {
 
     // REFRESH ACCESS TOKEN
     static async refreshAccessToken(req, res) {
-        const refreshToken = req.cookies.REFRESH_TOKEN;
+        const refreshToken = req.cookies.refreshToken;
+        console.log(refreshToken);
         if (refreshToken) {
             const cekUser = await user.findOne({ refreshToken });
             if (cekUser) {
@@ -127,7 +128,7 @@ module.exports = class {
     }
     // LOG OUT
     static async logOut(req, res) {
-        const cookie = req.cookies.REFRESH_TOKEN;
+        const cookie = req.cookies.refreshToken;
 
         if (cookie) {
             const cekAkun = await user.findOne({ refreshToken: cookie });
@@ -140,7 +141,7 @@ module.exports = class {
                         },
                     )
                     .then(() => {
-                        res.clearCookie('REFRESH_TOKEN');
+                        res.clearCookie('refreshToken');
                         res.sendStatus(200);
                     })
                     .catch((err) => {
