@@ -3,17 +3,13 @@ const user = require('../model/user.js');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-const puppeteer = require('puppeteer');
-
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: puppeteer.executablePath(),
         args: ['--no-sandbox'],
-        headless: 'new',
     },
 });
 client.on('qr', (qr) => {
