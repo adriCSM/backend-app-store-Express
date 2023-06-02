@@ -88,8 +88,8 @@ module.exports = class {
                     res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
-                        sameSite: false,
-                        secure: true,
+                        sameSite: 'None',
+                        // secure: true,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
@@ -106,7 +106,6 @@ module.exports = class {
     // REFRESH ACCESS TOKEN
     static async refreshAccessToken(req, res) {
         const refreshToken = req.cookies.refreshToken;
-        console.log(refreshToken);
         if (refreshToken) {
             const cekUser = await user.findOne({ refreshToken });
             if (cekUser) {

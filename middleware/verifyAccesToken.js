@@ -3,10 +3,10 @@ const verifyAccessToken = (req, res, next) => {
     const authorization = req.headers.authorization;
     const token = authorization && authorization.split(' ')[1];
     if (!token) {
-        res.status(401).json({ message: 'Tidak terdapat token' });
+        res.sendStatus(401);
     } else {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-            if (err) res.status(403).json({ message: 'Verifikasi token failed' });
+            if (err) res.sendStatus(403);
             else {
                 req.profile = decoded;
                 next();
