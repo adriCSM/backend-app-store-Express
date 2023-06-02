@@ -72,7 +72,6 @@ module.exports = class {
             const cekPassword = await bcrypt.compare(password, cekAkun.password);
             if (cekPassword) {
                 const { fullName, phoneNumber, email, picture } = cekAkun;
-                res.json(cekAkun);
                 const accessToken = jwt.sign({ fullName, phoneNumber, email, picture }, process.env.ACCESS_TOKEN_SECRET, {
                     expiresIn: '20s',
                 });
