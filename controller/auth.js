@@ -90,7 +90,7 @@ module.exports = class {
                         httpOnly: true,
                         expires: new Date(Date.now() + 8 * 3600000),
                         secure: true,
-                        sameSite: None,
+                        sameSite: false,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
