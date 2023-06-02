@@ -71,20 +71,21 @@ module.exports = class {
         else if (cekAkun) {
             const cekPassword = await bcrypt.compare(password, cekAkun.password);
             if (cekPassword) {
-                const { fullName, phoneNumber, email, picture } = cekAkun;
-                const accessToken = jwt.sign({ fullName, phoneNumber, email, picture }, process.env.ACCESS_TOKEN_SECRET, {
-                    expiresIn: '20s',
-                });
-                const refreshToken = jwt.sign({ fullName, phoneNumber, email, picture }, process.env.REFRESH_TOKEN_SECRET, {
-                    expiresIn: '1d',
-                });
                 try {
+                    const { fullName, phoneNumber, email, picture } = cekAkun;
+                    const accessToken = jwt.sign({ fullName, phoneNumber, email, picture }, process.env.ACCESS_TOKEN_SECRET, {
+                        expiresIn: '20s',
+                    });
+                    const refreshToken = jwt.sign({ fullName, phoneNumber, email, picture }, process.env.REFRESH_TOKEN_SECRET, {
+                        expiresIn: '1d',
+                    });
                     await user.findOneAndUpdate(
                         { email },
                         {
                             refreshToken,
                         },
                     );
+                    console.log(refreshToken);
                     res.cookie('refreshToken', refreshToken, {
                         httpOnly: true,
                         maxAge: 24 * 60 * 60 * 1000,
