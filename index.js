@@ -20,7 +20,7 @@ mongoose
         console.info(err.message);
     });
 
-if ((proccess.env.NODE_ENV = 'production')) {
+if ((process.env.NODE_ENV = 'production')) {
     cookeeOptions.secure = true;
     cookeeOptions.samwSite = 'none';
 }
