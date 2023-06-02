@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 const puppeteer = require('puppeteer');
 
 (async () => {
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
     await browser.close();
 })();
 
