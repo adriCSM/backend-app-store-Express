@@ -5,11 +5,6 @@ const nodemailer = require('nodemailer');
 
 const puppeteer = require('puppeteer');
 
-(async () => {
-    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
-    await browser.close();
-})();
-
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 
@@ -18,6 +13,7 @@ const client = new Client({
     puppeteer: {
         executablePath: puppeteer.executablePath(),
         args: ['--no-sandbox'],
+        headless: 'new',
     },
 });
 client.on('qr', (qr) => {
