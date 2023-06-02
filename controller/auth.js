@@ -91,6 +91,7 @@ module.exports = class {
                         expires: new Date(Date.now() + 8 * 3600000),
                         secure: true,
                         sameSite: 'None',
+                        signed: true,
                     });
                     res.status(200).json({ accessToken });
                 } catch (err) {
