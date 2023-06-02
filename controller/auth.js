@@ -66,6 +66,8 @@ module.exports = class {
     }
     // LOGIN
     static async login(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', 'https://adricsm.github.io');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
         const { email, password } = req.body;
         const cekAkun = await user.findOne({ email });
         if (!email || !password) res.status(400).json({ message: 'Field kosong' });
