@@ -66,8 +66,6 @@ module.exports = class {
     }
     // LOGIN
     static async login(req, res) {
-        res.setHeader('Access-Control-Allow-Origin', 'https://adricsm.github.io');
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
         const { email, password } = req.body;
         const cekAkun = await user.findOne({ email });
         if (!email || !password) res.status(400).json({ message: 'Field kosong' });
@@ -89,18 +87,9 @@ module.exports = class {
                         },
                     );
 
-                    // req.session.token = refreshToken;
-
                     const tandaTangan = createHmac('sha256', process.env.SECRET).update(refreshToken).digest('hex');
 
-                    res.cookie('refreshToken', `${refreshToken}|${tandaTangan}`, {
-                        httpOnly: true,
-                        expires: new Date(Date.now() + 8 * 3600000),
-                        secure: true,
-                        sameSite: 'None',
-                        signed: true,
-                    });
-                    res.status(200).json({ accessToken });
+                    res.status(200).json({ accessToken, refreshToken: `${refreshToken}@_@${tandaTangan}` });
                 } catch (err) {
                     res.status(500).json({ message: err.message });
                 }
@@ -114,15 +103,16 @@ module.exports = class {
 
     // REFRESH ACCESS TOKEN
     static async refreshAccessToken(req, res) {
-        const refreshToken = req.signedCookies.refreshToken;
+        const authorization = req.headers.authorization;
+        const token = authorization && authorization.split(' ')[1];
 
-        if (refreshToken) {
-            const [token, tandaTangan] = req.signedCookies.refreshToken.split('|');
-            const cekTandaTangan = createHmac('sha256', process.env.SECRET).update(token).digest('hex');
-            if (cekTandaTangan == tandaTangan) {
-                const cekUser = await user.findOne({ refreshToken: token });
+        if (token) {
+            const [refreshToken, tandaTangan] = token.split('@_@');
+            const hashTandaTangan = createHmac('sha256', process.env.SECRET).update(refreshToken).digest('hex');
+            if (tandaTangan == hashTandaTangan) {
+                const cekUser = await user.findOne({ refreshToken });
                 if (cekUser) {
-                    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+                    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
                         if (err) res.sendStatus(403);
                         else {
                             const newAccessToken = jwt.sign({ decoded }, process.env.ACCESS_TOKEN_SECRET, {
@@ -135,7 +125,7 @@ module.exports = class {
                     res.sendStatus(403);
                 }
             } else {
-                res.status(401).json({ message: 'Signed key tidak valid' });
+                res.status(401).json({ message: 'Secret key tidak valid' });
             }
         } else {
             res.sendStatus(401);
@@ -143,26 +133,33 @@ module.exports = class {
     }
     // LOG OUT
     static async logOut(req, res) {
-        const cookie = req.cookies.refreshToken;
-        if (cookie) {
-            const cekAkun = await user.findOne({ refreshToken: cookie });
-            if (cekAkun) {
-                await user
-                    .findByIdAndUpdate(
-                        { _id: cekAkun._id },
-                        {
-                            refreshToken: null,
-                        },
-                    )
-                    .then(() => {
-                        res.clearCookie('refreshToken');
-                        res.sendStatus(200);
-                    })
-                    .catch((err) => {
-                        res.status(500).json({ message: err.message });
-                    });
+        const authorization = req.headers.authorization;
+        const token = authorization && authorization.split(' ')[1];
+        if (token) {
+            const [refreshToken, tandaTangan] = token.split('@_@');
+            const hashTandaTangan = createHmac('sha256', process.env.SECRET).update(refreshToken).digest('hex');
+            if (tandaTangan == hashTandaTangan) {
+                const cekAkun = await user.findOne({ refreshToken });
+                if (cekAkun) {
+                    await user
+                        .findByIdAndUpdate(
+                            { _id: cekAkun._id },
+                            {
+                                refreshToken: null,
+                            },
+                        )
+                        .then(() => {
+                            res.clearCookie('refreshToken');
+                            res.sendStatus(200);
+                        })
+                        .catch((err) => {
+                            res.status(500).json({ message: err.message });
+                        });
+                } else {
+                    res.sendStatus(204);
+                }
             } else {
-                res.sendStatus(204);
+                res.status(401).json({ message: 'Secret key tidak valid' });
             }
         } else {
             res.sendStatus(204);
